@@ -1,0 +1,55 @@
+Yo, je te met ici toutes les informations que tu as besoin de savoir pour travailler tranquillement sur l'API.
+
+- Il ne faut jamais toucher le fichier app.js
+- Il te faut générer un fichier .env
+- Les informations à rentrer dans le .env sont dans le fichier Readme
+- Toutes données sensibles à notre projet doivent être stockée dans le .env
+- Assure toi de ne jamais push le .env !
+
+________________________________
+
+- Les routes, méthodes et controllers :
+
+    - Dossier routes avec un dossier open et restricted
+    - Dossier open : 2 fichier openRoutes et openRoutesMethods
+        Dans le fichier openRoutes, tu écris les routes comme celle que je t'ai laissé
+        Dans le fichier openRoutesMethods tu aura les fonctions rattaché à la route
+
+        Si tu regarde bien la route, à la fin je précise la fonction que je vais utiliser. Cette fonction qui se trouve dans
+openRoutesMethods fait elle appel à un controller (dossier controller) et c'est dans ce controller que nous traitons les données et que
+nous les renvoyons.
+
+Si tu as besoin de créer un controller, fais le.
+
+En gros : J'appel une route -> j'envoi les infos reçu vers le fichier xxxRoutesMethods.js -> j'envoi les infos au controller correspondant
+Puis : Je traite dans le controller -> Je renvoi le résultat au fichier xxxRoutesMethods.js -> Et je retourne au front un résultat spécifique aux besoins
+
+Tu verras aussi dans une route un validateRequest. C'est le Middleware qui permet de vérifier les informations reçu de l'API. Grâce à ce
+middleware, on vérifie en amont les données reçus et si elles sont correct, on lance le traitement des données précédent sinon on envoi
+une erreur.
+
+Ce middleware sera placé uniquement sur les routes qui attendent une donnée. Donc les routes GET n'en ont pas besoin par exemple
+Quand tu attend des données, tu fais comme l'exemple de la route que je t'ai laissé, c'est à dire tu laisse un "code" dans le validateRequest
+
+/!\ Si tu as une erreur liée au validateRequest ce n'est pas grave ! C'est parce qu'il ne comprend pas le code que tu lui indique
+Cette erreur partira quand tu auras fais la suite
+
+Ensuite tu vas dans le dossier utils/validators et tu écris la fonction que tu as besoin comme celle que je t'ai laissée.
+Le code doit être 100% égal à celui qui tu as indiqué dans la route. Attention !
+
+Pour connaître toutes les validations possible, je te renvoi sur la doc de express-validator
+
+    - Dossier restricted
+    Même logique que le précédent, c'est à dire routes, méthodes et renvoi au controller
+
+    Il y a cependant un point à prendre en compte sur ces routes. Ce sont toutes les routes qui nécessitent un token pour être utilisées
+    Il faudra donc faire attention à ce point qui est primordial ! Si tu laisse passé sans token, l'API va être détruite sans soucis.
+
+
+Pour finir (pour l'instant), pour tester toutes les routes dans le fichier open tu devras ajouter un préfixe :
+    - localhost:3000/api/lenomdetaroute
+
+Pour le fichier restricted ce sera :
+    - localhost:3000/api/auth/lenomdetaroute
+
+Si tu test ta route sans /api ou /api/auth, ça ne marchera jamais
