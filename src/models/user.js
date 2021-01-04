@@ -13,6 +13,9 @@ const UserSchema = new Schema({
     access_token: String,
     forgot_token: String,
     trial: Boolean,
+    subscription: Boolean,
+    subscription_type: String,
+    subscription_token: String,
     Clients: [{
         id: String,
         status: String,
@@ -30,6 +33,8 @@ const UserSchema = new Schema({
             limit_at: Date,
             num_facture: String,
             status: String,
+            relance: Number,
+            relance_at: Date,
             Items: [{
                 name: String,
                 description: String,
